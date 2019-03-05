@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>导航</title>
+	<link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+<header></header>
+<main class="mainM">
+	<div id="mainA"></div>
+</main>
+<footer></footer>
+<script type="text/javascript">
+	var keys = [['q','w','e','r','t','y','u','i','o','p'],['a','s','d','f','g','h','j','k','l'],['z','x','c','v','b','n','m']]
+	var hash = {
+		"q":"qq.com",
+		"w":"weibo.com"
+	}
+	var hashInLocalStorage = JSON.parse(localStorage.getItem("zzz") || "null")
+	if(hashInLocalStorage){
+		hash = hashInLocalStorage
+	}
+
+	for(i = 0; i<keys.length; i++){
+		var divTemp = document.createElement("div")
+		for(v = 0; v<keys[i].length; v++){
+			var kbdTemp = document.createElement("kbd")
+			kbdTemp.textContent = keys[i][v]
+			var buttonTemp = document.createElement("button")
+			buttonTemp.textContent = "E"
+			buttonTemp.id = keys[i][v]
+			buttonTemp.onclick = function(contentButton){
+			hash[contentButton.target.id] = prompt("请输入网址")
+			localStorage.setItem("zzz", JSON.stringify(hash))
+			}
+			kbdTemp.appendChild(buttonTemp)
+			divTemp.appendChild(kbdTemp)
+		}
+		mainA.appendChild(divTemp)
+	}
+	document.onkeypress = function(pp11p){
+		key = pp11p.key
+		website = hash[key]
+		window.open("http://" + website)
+	}
+</script>
+</body>
+</html>
