@@ -4,7 +4,7 @@
 	cursor:default;
 }
 body{
-	background: url("alum.png") repeat center center fixed;
+	background: url("https://raw.githubusercontent.com/tonydee1993/myBookmarks/master/alum.png") repeat center center fixed;
 }
 a{
 	text-decoration: none;
@@ -13,7 +13,7 @@ a{
     font-family: keyboard;
     font-weight: normal;
     font-style: normal;
-    src: url('keyboard.otf');
+    src: url('https://github.com/tonydee1993/myBookmarks/raw/master/keyboard.otf');
 }
 kbd{
 	width: 69px;
