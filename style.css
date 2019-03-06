@@ -4,7 +4,7 @@
 	cursor:default;
 }
 body{
-	background: url(../alum.png) repeat center center fixed;
+	background: url("alum.png") repeat center center fixed;
 }
 a{
 	text-decoration: none;
@@ -13,7 +13,7 @@ a{
     font-family: keyboard;
     font-weight: normal;
     font-style: normal;
-    src: url('/keyboard.otf');
+    src: url('keyboard.otf');
 }
 kbd{
 	width: 69px;

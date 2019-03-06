@@ -53,12 +53,17 @@
 
 			buttonTemp.onclick = function(contentButton){				//监听编辑按钮
 				console.log(contentButton)
-				hash[contentButton.target.id] = prompt("请输入网址")
-				localStorage.setItem("zzz", JSON.stringify(hash))
-				console.log(hash[contentButton.target.id]+",这个哈希现在是这样的")
-				getImg(hash[contentButton.target.id])				
-				contentButton.target.parentElement.appendChild(imgTemp)
-				console.log(imgTemp+"，img的桥梁变量就是这样")
+				event.stopPropagation();
+				web = prompt("请输入网址")
+				if(web){
+					hash[contentButton.target.id] = web
+					localStorage.setItem("zzz", JSON.stringify(hash))
+					console.log(hash[contentButton.target.id]+",这个哈希现在是这样的")
+					getImg(hash[contentButton.target.id])				
+					contentButton.target.parentElement.appendChild(imgTemp)
+					console.log(imgTemp+"，img的桥梁变量就是这样")
+				}
+				
 			}
 
 			//获取favicon函数
@@ -108,6 +113,12 @@
         };
         elements[i].onmouseup = function(){
             this.style.transform = "translateY(0px)"
+        };
+        elements[i].onclick = function(){			//点击键盘也可以打开
+        	if(hash[this.textContent.substr(0,1)]){
+	        	console.log(this)
+	            window.open("http://" + hash[this.textContent.substr(0,1)])
+        	}
         };
     }
 
