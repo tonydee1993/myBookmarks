@@ -11,38 +11,106 @@
 </main>
 <footer></footer>
 <script type="text/javascript">
+	//创建hash
 	var keys = [['q','w','e','r','t','y','u','i','o','p'],['a','s','d','f','g','h','j','k','l'],['z','x','c','v','b','n','m']]
 	var hash = {
-		"q":"qq.com",
-		"w":"weibo.com"
+		"q":"qzone.qq.com",
+		"w":"weibo.com",
+		"e":"ele.me",
+		"t":"taobao.com",
+		"i":"iqiyi.com",
+		"s":"sina.com",
+		"c":"chiphell.com",
+		"v":"v2ex.com",
+		"b":"baidu.com",
+		"n":"nba.qq.com",
+		"m":"meituan.com"
 	}
+
+	//调用本地存储 覆盖hash
 	var hashInLocalStorage = JSON.parse(localStorage.getItem("zzz") || "null")
 	if(hashInLocalStorage){
 		hash = hashInLocalStorage
 	}
 
-	for(i = 0; i<keys.length; i++){
+	
+	//生成键盘
+	for(i = 0; i<keys.length; i++){			//键盘遍历
 		var divTemp = document.createElement("div")
-		for(v = 0; v<keys[i].length; v++){
+		for(v = 0; v<keys[i].length; v++){			//hash遍历
+			//生成kbd
 			var kbdTemp = document.createElement("kbd")
 			kbdTemp.textContent = keys[i][v]
+			kbdTemp.className = keys[i][v]
+			kbdTemp.className = "kbda"
+
+			//生成按钮
 			var buttonTemp = document.createElement("button")
 			buttonTemp.textContent = "E"
 			buttonTemp.id = keys[i][v]
-			buttonTemp.onclick = function(contentButton){
-			hash[contentButton.target.id] = prompt("请输入网址")
-			localStorage.setItem("zzz", JSON.stringify(hash))
+			
+			getImg(hash[keys[i][v]])			//调用getImg获取一次favicon
+
+			buttonTemp.onclick = function(contentButton){				//监听编辑按钮
+				console.log(contentButton)
+				hash[contentButton.target.id] = prompt("请输入网址")
+				localStorage.setItem("zzz", JSON.stringify(hash))
+				console.log(hash[contentButton.target.id]+",这个哈希现在是这样的")
+				getImg(hash[contentButton.target.id])				
+				contentButton.target.parentElement.appendChild(imgTemp)
+				console.log(imgTemp+"，img的桥梁变量就是这样")
 			}
+
+			//获取favicon函数
+			function getImg(a){	
+				if(a == undefined){	
+					console.log("notfound")		//网址不存在的情况
+					imgTemp = document.createElement("img")
+					imgTemp.src = "//i.loli.net/2017/11/10/5a05afbc5e183.png"
+					imgTemp.style.width = "16px"
+					imgTemp.style.height = "16px"
+				}else{			//网址存在的情况
+					console.log("发现网址："+a)
+					imgTemp = document.createElement("img")					
+					console.log("创建图片标签："+a)
+					imgTemp.src = "http://"+a+"/favicon.ico"				
+					console.log("输入图片地址："+imgTemp.src)
+					imgTemp.style.width = "16px"
+					imgTemp.style.height = "16px"
+				}
+				imgTemp.onerror = function(xx){				//错误判断
+					xx.target.src = "//i.loli.net/2017/11/10/5a05afbc5e183.png"
+				}
+
+				console.log(kbdTemp)
+			}
+
+			//kbd、按钮、favicon放入页面
+			kbdTemp.appendChild(imgTemp)
 			kbdTemp.appendChild(buttonTemp)
 			divTemp.appendChild(kbdTemp)
 		}
 		mainA.appendChild(divTemp)
 	}
+
+	//监听键盘事件
 	document.onkeypress = function(pp11p){
 		key = pp11p.key
 		website = hash[key]
 		window.open("http://" + website)
 	}
+
+	//点击按钮下移 动效
+    var elements = document.getElementsByClassName("kbda")
+    for(var i = 0;i < elements.length;i++){
+        elements[i].onmousedown = function(){
+            this.style.transform = "translateY(2px)"
+        };
+        elements[i].onmouseup = function(){
+            this.style.transform = "translateY(0px)"
+        };
+    }
+
 </script>
 </body>
 </html>
