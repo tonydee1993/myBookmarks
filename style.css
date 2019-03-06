@@ -13,7 +13,7 @@ a{
     font-family: keyboard;
     font-weight: normal;
     font-style: normal;
-    src: url('https://github.com/tonydee1993/myBookmarks/raw/master/keyboard.otf');
+    src: url('https://raw.githubusercontent.com/tonydee1993/myBookmarks/master/keyboard.otf');
 }
 kbd{
 	width: 69px;
